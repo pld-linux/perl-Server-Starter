@@ -1,12 +1,11 @@
 #
 # Conditional build:
 %bcond_without	tests		# do not perform "make test"
-#
+
 %define		pdir	Server
 %define		pnam	Starter
 %include	/usr/lib/rpm/macros.perl
 Summary:	Server::Starter - a superdaemon for hot-deploying server programs
-#Summary(pl.UTF-8):
 Name:		perl-Server-Starter
 Version:	0.11
 Release:	1
@@ -15,10 +14,9 @@ License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
 Source0:	http://www.cpan.org/modules/by-module/Server/%{pdir}-%{pnam}-%{version}.tar.gz
 # Source0-md5:	037d75831a23ca76cd306d678b20332e
-#URL:		http://search.cpan.org/dist/Server-Starter/
+URL:		http://search.cpan.org/dist/Server-Starter/
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
-# generic URL, check or change before uncommenting
 %if %{with tests}
 BuildRequires:	perl-List-MoreUtils
 BuildRequires:	perl-Proc-Wait3
