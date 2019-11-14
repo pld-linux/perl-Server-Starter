@@ -7,13 +7,13 @@
 %include	/usr/lib/rpm/macros.perl
 Summary:	Server::Starter - a superdaemon for hot-deploying server programs
 Name:		perl-Server-Starter
-Version:	0.11
+Version:	0.35
 Release:	1
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
 Source0:	http://www.cpan.org/modules/by-module/Server/%{pdir}-%{pnam}-%{version}.tar.gz
-# Source0-md5:	037d75831a23ca76cd306d678b20332e
+# Source0-md5:	10cc818382ff22b27d9af37344fbff18
 URL:		http://search.cpan.org/dist/Server-Starter/
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
@@ -51,33 +51,31 @@ under Server::Starter should conform to:
 A Net::Server personality that can be run under Server::Starter exists
 under the name Net::Server::SS::PreFork.
 
-
-
-# %description -l pl.UTF-8 # TODO
-
 %prep
 %setup -q -n %{pdir}-%{pnam}-%{version}
 
 %build
-%{__perl} Makefile.PL \
-	INSTALLDIRS=vendor
-%{__make}
+%{__perl} Build.PL \
+        --destdir=$RPM_BUILD_ROOT \
+        --installdirs=vendor
+./Build
 
-%{?with_tests:%{__make} test}
+%{?with_tests:./Build test}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} pure_install \
-	DESTDIR=$RPM_BUILD_ROOT
+./Build install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc Changes README
+%doc Changes README.md
 %attr(755,root,root) %{_bindir}/start_server
 %{_mandir}/man1/start_server.1p*
+%dir %{perl_vendorlib}/Server/Starter
+%{perl_vendorlib}/Server/Starter/Guard.pm
 %{perl_vendorlib}/Server/*.pm
 %{_mandir}/man3/*
