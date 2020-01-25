@@ -4,7 +4,6 @@
 
 %define		pdir	Server
 %define		pnam	Starter
-%include	/usr/lib/rpm/macros.perl
 Summary:	Server::Starter - a superdaemon for hot-deploying server programs
 Name:		perl-Server-Starter
 Version:	0.35
