@@ -7,7 +7,7 @@
 Summary:	Server::Starter - a superdaemon for hot-deploying server programs
 Name:		perl-Server-Starter
 Version:	0.35
-Release:	1
+Release:	2
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
