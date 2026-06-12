@@ -7,7 +7,7 @@
 Summary:	Server::Starter - a superdaemon for hot-deploying server programs
 Name:		perl-Server-Starter
 Version:	0.35
-Release:	2
+Release:	3
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
@@ -65,6 +65,10 @@ under the name Net::Server::SS::PreFork.
 rm -rf $RPM_BUILD_ROOT
 
 ./Build install
+
+# Module::Build::Tiny installs scripts verbatim and does not fix the #!perl
+# shebang the way MakeMaker does, leaving start_server unrunnable
+%{__sed} -i -e '1s,^#!.*,#!%{__perl},' $RPM_BUILD_ROOT%{_bindir}/start_server
 
 %clean
 rm -rf $RPM_BUILD_ROOT
